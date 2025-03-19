@@ -1,0 +1,1 @@
+# Waste-Image-Classification-Hackathon-2025
