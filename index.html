@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Waste Classifier - Home</title>
+  <!-- Link to your main stylesheet -->
+  <link rel="stylesheet" href="static/style.css" />
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+  <!-- Header with Navigation Bar -->
+  <header class="header">
+    <div id="logo-container">
+      <img id="logo-img" src="images/waste2.webp" alt="Waste Classifier Logo">
+      <span id="logo-text">Waste Classifier</span>
+    </div>
+    <!-- Hamburger Menu Button -->
+    <div id="menu-btn">&#9776;</div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="classify.html">Classify</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- Swiper Slider -->
+   
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image: url('images/waste1.jpg');">
+        <div class="content">
+          <h3>Green Future Awaits</h3>
+        </div>
+      </div>
+      <div class="swiper-slide" style="background-image: url('images/waste2.webp');">
+        <div class="content">
+          <h3>Recycle for a Better Planet</h3>
+        </div>
+      </div>
+      <div class="swiper-slide" style="background-image: url('images/waste5.jpg');">
+        <div class="content">
+          <h3>Transform Waste, Transform Lives</h3>
+        </div>
+      </div>
+    </div>
+    <!-- Swiper Pagination and Navigation -->
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+
+    <!-- Get Started Button -->
+    <a href="classify.html" class="get-started-btn">Get Started</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Waste Classifier. All rights reserved.</p>
+  </footer>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <!-- Custom JS (initializes Swiper, etc.) -->
+  <script src="static/scripts.js"></script>
+</body>
+</html>

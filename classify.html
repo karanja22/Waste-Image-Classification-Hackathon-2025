@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classify Your Waste - Waste Classifier</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <!-- Header with Navigation Bar -->
+  <header class="header">
+    <div id="logo-container">
+      <img id="logo-img" src="images/waste2.webp" alt="Waste Classifier Logo">
+      <span id="logo-text">Waste Classifier</span>
+    </div>
+    <!-- Hamburger Menu Button -->
+    <div id="menu-btn">&#9776;</div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="classify.html">Classify</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- Main Classification Content -->
+  <main class="classify">
+    <h1 class="heading">Upload an Image for Prediction</h1>
+    
+    <!-- Wrap form in .upload-box for consistent styling -->
+    <div class="upload-box">
+      <!-- The form submits a POST request to the /predict endpoint -->
+      <form action="/predict" method="post" enctype="multipart/form-data" id="predictForm">
+        <input type="file" name="file" id="fileInput" accept="image/*" required onchange="previewImage()">
+        <div id="imagePreview"></div>
+        <button type="submit" class="btn">Predict</button>
+      </form>
+    </div>
+    
+    <!-- If the backend sets these variables, display them -->
+    {% if prediction %}
+      <h2 id="result">Prediction: {{ prediction }}</h2>
+    {% endif %}
+    {% if image_url %}
+      <h3>Uploaded Image:</h3>
+      <img src="{{ image_url }}" alt="Uploaded Image" style="max-width:300px;">
+    {% endif %}
+
+    <!-- The tips area will be filled by script.js if you're also doing client-side classification -->
+    <div id="tips" class="hidden"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Waste Classifier. All rights reserved.</p>
+  </footer>
+
+  <script src="static/script.js"></script>
+</body>
+</html>
