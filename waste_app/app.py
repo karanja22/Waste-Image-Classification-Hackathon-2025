@@ -9,7 +9,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # ✅ Load the trained model
-model_path ="svm_model.pkl"
+model_path = os.path.join(os.getcwd(), "svm_model.pkl")
 
 
 try:
