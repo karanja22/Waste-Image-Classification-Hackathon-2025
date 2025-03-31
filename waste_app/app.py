@@ -11,6 +11,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # ✅ Load the trained model
 model_path = os.path.join("model_processing", "model.keras")
 
+
 try:
     model = tf.keras.models.load_model(model_path)
     print("✅ Model loaded successfully!")
