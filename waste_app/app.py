@@ -9,7 +9,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # ✅ Load the trained model
-model_path = "best_model.keras"
+model_path = os.path.join("model_preprocessing", "best_model.keras")
 
 try:
     model = tf.keras.models.load_model(model_path)
