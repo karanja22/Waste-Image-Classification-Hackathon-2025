@@ -23,7 +23,7 @@ In this stage, we loaded the raw dataset (downloaded from [this link](https://pr
    We removed corrupt images by verifying each file with PIL.
 
 2. **Standardization:**  
-   All images were resized to **256×256 pixels** to ensure consistency across the dataset.
+   All images were resized to **128×128 pixels** to ensure consistency across the dataset.
 
 3. **Normalization:**  
    Pixel values were normalized to the range **[0, 1]** to facilitate efficient training.
@@ -134,6 +134,7 @@ This project successfully developed an AI-based waste classification system that
 - **Managing memory constraints** during image preprocessing.
 - **Ensuring robust data cleaning** and handling diverse image formats.
 - **Integrating model predictions** with a responsive web interface.
+- **Model predicting wrongly.
 
 This project not only highlights technical expertise in machine learning and web development but also underscores the potential for AI-driven solutions to contribute to a cleaner, more sustainable environment.
 
