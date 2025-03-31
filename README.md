@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Waste Image Classification Hackathon 2025 challenged us to develop an AI-based system capable of automatically classifying waste images into two categories: **Organic Waste** and **Recyclable Waste**. Our objective was to build a complete pipeline—from data preprocessing, feature extraction, model training, and evaluation to deployment and UI integration—aimed at improving waste-sorting efficiency and promoting environmental sustainability. We trained and evaluated our model locally on our PC and developed a Flask API to integrate with a responsive waste classification website.
+Waste Image Classification Hackathon 2025 challenged us to develop an AI-based system capable of automatically classifying waste images into two categories: **Organic Waste** and **Recyclable Waste**. 
+Our objective was to build a complete pipeline—from data preprocessing, feature extraction, model training, and evaluation to deployment and UI integration—aimed at improving waste-sorting efficiency and promoting environmental sustainability. We trained and evaluated our model locally on our PC and developed a Flask API to integrate with a responsive waste classification website.
 
 
 ---
@@ -43,14 +44,19 @@ In this stage, we loaded the raw dataset (downloaded from [this link](https://pr
 
 ### Overview
 
-After preprocessing (which included cleaning, resizing, and normalizing the images), we proceeded to extract features that would be used to train our waste classification model. Feature extraction is a crucial step in machine learning because it transforms raw image data into a structured numerical representation that the model can understand. We loaded the images in grayscale to reduce computational complexity while retaining essential shape and texture information instead of using normal RGB colors. A 256×256 grayscale image contains 65,536 pixel values. Instead of treating this as a 2D matrix, we flattened it into a single 1D array (vector) with 65,536 elements. This ensures that every image has a consistent input shape for the machine learning model.
+Feature extraction transforms raw image data into a structured format that a machine learning model can understand.
 
+Unlike the initial approach where we considered grayscale images, we trained our model using full RGB images to retain color-based features that improve classification accuracy.
+
+### Feature Representation
+
+Each 128×128 RGB image consists of three color channels (Red, Green, Blue), resulting in a shape of (128, 128, 3). We normalized these pixel values to [0,1] before feeding them into the model.
 ---
 ## Data splitting
 
 ### Overview
 
-After extracting features from the preprocessed and augmented images, we split the data into training and testing batches using an 80/20 split. We processed the data in smaller batches to avoid memory overload, loading each batch of features and labels from disk, and then applied scikit-learn’s train_test_split to divide each batch. This allowed us to preserve the overall class distribution (stratification) and ensured that our training and testing sets are reproducible.
+After feature extraction, we split the dataset into training (80%) and validation (20%) sets to train and evaluate our model's performance. Instead of loading the entire dataset into memory at once (which can cause memory overload), we implemented an efficient data pipeline using TensorFlow’s tf.data API to load, preprocess, and feed data to the model dynamically in batches.
 
 ### Code Snippet for feature extraction and data splitiing
 ---
@@ -111,7 +117,23 @@ Additional pages for model information (About) and developer profiles (Contact).
 
  
 #### Screenshots:
-- Final UI screenshots (Homepage, Classify, About, and Contact pages) are included in the **Screenshots** folder.
+
+##### Home page  
+
+![Home](https://github.com/user-attachments/assets/77f24ae7-4bf0-4492-98c7-443ddada9579)
+
+##### Classify page
+
+![classify](https://github.com/user-attachments/assets/454332d4-8cb7-4679-bbe6-ee62b4bd18bc)
+
+##### About page
+
+![about (2)](https://github.com/user-attachments/assets/a6b4c5d3-3128-438d-8d25-fc7d16aad1a7)
+
+##### Contact page
+
+![contact](https://github.com/user-attachments/assets/9243b397-0220-4fe1-8167-0c50c8255e5a)
+
 
 ## Conclusion
 
