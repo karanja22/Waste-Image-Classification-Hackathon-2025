@@ -330,7 +330,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Load the trained model
-model_path = os.path.join("model_processing", "model.keras")
+model_path = os.path.join("model_processing", "svm_model.pkl")
 
 try:
     model = tf.keras.models.load_model(model_path)
