@@ -43,11 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // // 🔹 Fix: Run classifyWaste() when the form is submitted
+  // // Fix: Run classifyWaste() when the form is submitted
   // document.getElementById("predictForm").addEventListener("submit", function (event) {
   //   event.preventDefault(); // Stop page reload
   //   classifyWaste();
   // });
+  const yourTips = document.getElementById("");
+  yourTips.style.display = 'none';
 });
 
 // Function to preview the uploaded image (used in classify page)
@@ -84,36 +86,46 @@ function classifyWaste() {
     method: "POST",
     body: formData,
   })
-    .then((response) => response.json())
+    .then((response) => response.json())  // Parse the response as JSON
     .then((data) => {
       let resultElement = document.getElementById("result");
       let tipsElement = document.getElementById("tips");
 
-      resultElement.innerText = `Prediction: ${data.prediction}`;
-      console.log("Before:", tipsElement.style.display);
-      tipsElement.classList.remove("hidden");
-      tipsElement.style.display = "block";  // Ensure it is visible
-      console.log("After:", tipsElement.style.display);
+      
+      // Check if there's an error in the response
+      if (data.error) {
+        resultElement.innerText = `Error: ${data.error}`;
+        tipsElement.classList.add("hidden");
+      } else {
+        resultElement.innerText = `Prediction: ${data.prediction}`;
 
-      if (data.prediction === "Recyclable") {
-        tipsElement.innerHTML = `
-          <h3>Recycling Tips:</h3>
-          <ul>
-            <li>Separate plastics, paper, and metal before recycling.</li>
-            <li>Rinse food containers before placing them in the recycling bin.</li>
-            <li>Check with local recycling programs for guidelines.</li>
-          </ul>
-        `;
-      } else if (data.prediction === "Organic") {
-        tipsElement.innerHTML = `
-          <h3>Organic Waste Handling Tips:</h3>
-          <ul>
-            <li>Compost fruit and vegetable scraps to create natural fertilizer.</li>
-            <li>Avoid throwing meat or dairy products into compost bins.</li>
-            <li>Use biodegradable waste bags for disposal.</li>
-          </ul>
-        `;
+        // Ensure the tips div is visible by removing the 'hidden' class
+        tipsElement.classList.remove("hidden");  // Remove hidden class
+
+        if (data.prediction === "Recyclable") {
+          tipsElement.innerHTML = `
+            <h3>Recycling Tips:</h3>
+            <ul>
+              <li>Separate plastics, paper, and metal before recycling.</li>
+              <li>Rinse food containers before placing them in the recycling bin.</li>
+              <li>Check with local recycling programs for guidelines.</li>
+            </ul>
+          `;
+        } else if (data.prediction === "Organic") {
+          tipsElement.innerHTML = `
+            <h3>Organic Waste Handling Tips:</h3>
+            <ul>
+              <li>Compost fruit and vegetable scraps to create natural fertilizer.</li>
+              <li>Avoid throwing meat or dairy products into compost bins.</li>
+              <li>Use biodegradable waste bags for disposal.</li>
+            </ul>
+          `;
+        }
+
+        // Display the uploaded image
+        let imagePreview = document.getElementById("imagePreview");
+        imagePreview.innerHTML = `<img src="${data.image_url}" alt="Uploaded Image" style="max-width: 300px; margin-top: 10px;">`;
       }
     })
     .catch((error) => console.error("Error:", error));
-}  
+}

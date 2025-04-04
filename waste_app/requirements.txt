@@ -1,0 +1,10 @@
+Flask
+Pillow
+numpy
+joblib
+werkzeug
+blinker
+click
+itsdangerous
+Jinja2
+scikit-learn
