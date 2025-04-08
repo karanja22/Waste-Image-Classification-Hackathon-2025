@@ -50,20 +50,41 @@ def clean_images(image_folder):
 
 
 ---
-## Feature Extraction and Model Training
+## Feature Extraction 
 
 ### Overview
 
-After preprocessing, we extracted features from the images and split the data into training and testing batches.
-For feature extraction, each image was loaded from the saved batches, reshaped (flattened) for model compatibility, and normalized. We then performed an 80/20 split using train_test_split to ensure reproducibility and balanced class distribution.
-We used SGDClassifier for incremental training of our model with class weights to address any class imbalance.
+In our project, we performed feature extraction to transform raw image data into a format suitable for machine learning algorithms.
+
+ 1. **Loading Images**: We began by loading the preprocessed images from storage, allowing us to manipulate and analyze them effectively.
+ 2. **Reshaping Images**: Each image, originally a 2D array (height x width) with color channels, was reshaped into a 1D array (feature vector). For instance, a 256x256 image with RGB channels was converted into a vector of size 256 * 256 *
+ 3. **Compiling Feature Set**: We compiled all the reshaped images into a single array, forming the feature set X. This array served as the input for training our model.
+
+### Code
+
+```python
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+# Load images and labels
+X = np.load("images.npy").reshape(-1, 256 * 256 * 3)  # Reshape images
+y = np.load("labels.npy")
+
+# Standardize features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+```
 
 ## Data splitting
 
-After feature extraction, we split the dataset into training (80%) and testing (20%) batches.
-Rather than loading the entire dataset into memory (which can cause memory issues), we processed and saved the data in batches using NumPy, then used scikit-learn’s train_test_split to generate indices for training and testing, ensuring a stratified split.
+### Overview
 
-### Code Snippet for feature extraction and Model training
+Rather than loading the entire dataset into memory (which can cause memory issues), we processed and saved the data in batches using NumPy, then used scikit-learn’s train_test_split to generate indices for training and testing, ensuring a stratified split.
+ 1. **Training Set**: This subset is used to train the model. It contains the majority of the data (e.g., 80%) and allows the model to learn the underlying patterns in the data.
+ 2. **Testing Set**: The remaining subset (e.g., 20%) is used to evaluate the model's performance. This helps assess how well the model generalizes to unseen data.
+ 3. **Stratification**: When splitting the data, it's important to maintain the proportion of each class (e.g., organic vs. recyclable waste) in both subsets. This ensures that the model is trained and tested on a representative sample of each class.
+    
+### Code 
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -71,8 +92,37 @@ from sklearn.model_selection import train_test_split
 # Split data into training and testing sets
 train_indices, test_indices = train_test_split(np.arange(len(y)), test_size=0.2, random_state=42, stratify=y)
 ```
----
 
+
+---
+## Model Training
+
+###Overview
+
+Model training is the process of teaching the machine learning algorithm to recognize patterns in the data.
+
+1. **Choosing a Model**: For this project, we use SGDClassifier, which is a linear classifier that uses stochastic gradient descent for optimization. This model is effective for large datasets and can handle online learning.
+2. **Fitting the Model**: The model is trained using the training set (X_train, y_train). During this process, the algorithm adjusts its internal parameters to minimize the error in predictions based on the training data.
+3. **Making Predictions**: After training, the model is tested on the testing set (X_test). It predicts the class labels for the test images.
+4. **Evaluating Performance**: Finally, the model's performance is evaluated using metrics such as accuracy, which indicates the proportion of correct predictions compared to the total number of predictions. This helps determine how well the model will perform in real-world scenarios.
+
+### Code
+
+```python
+from sklearn.linear_model import SGDClassifier
+from sklearn.metrics import accuracy_score
+
+# Initialize and train the model
+model = SGDClassifier(loss='log_loss', random_state=42)
+model.fit(X_train, y_train)
+
+# Evaluate performance
+accuracy = accuracy_score(y_test, model.predict(X_test))
+print(f"Model accuracy: {accuracy:.2f}")
+```
+
+
+---
 ## Model Evaluation
 
 ### Overview
@@ -98,6 +148,7 @@ print("Classification Report:\n", classification_report(y_true, y_pred))
 ![evaluation](https://github.com/user-attachments/assets/02db3d63-a25d-4ecf-9933-dd80b30c8e69)
 
 
+---
 ## Deployment & API
 
 ### Overview
@@ -130,6 +181,7 @@ def predict():
     ...
 ```
 
+---
 ## UI Integration
 
 ### Overview
@@ -174,10 +226,11 @@ It features:
 ![pred2](https://github.com/user-attachments/assets/12811173-aa85-4ba1-85b1-9d7e32d472f0)
 
 
-
+---
 ## Conclusion
 
-### Pros
+### Achievements
+
 - **Automated Waste Sorting**: The system efficiently classifies waste into organic and recyclable categories, reducing manual sorting efforts.
   
 - **Improved Efficiency**: Robust data preprocessing and feature extraction enhance the overall accuracy and speed of classification.
