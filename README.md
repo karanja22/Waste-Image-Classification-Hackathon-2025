@@ -154,7 +154,8 @@ It features:
 
 ##### Classify page
 
-![classify](https://github.com/user-attachments/assets/454332d4-8cb7-4679-bbe6-ee62b4bd18bc)
+![classify](https://github.com/user-attachments/assets/b2834ec6-d1db-4f90-9e37-0a5b99b68283)
+
 
 ##### About page
 
@@ -167,9 +168,10 @@ It features:
 
 ## Classified Images from our model
 
-![pred](https://github.com/user-attachments/assets/a4fab64a-ffdd-4278-827a-bf9c0027f1c4)
+![pred](https://github.com/user-attachments/assets/f6d5dfda-f615-4d56-8e56-be259de84822)
 
-![pred2](https://github.com/user-attachments/assets/ae980885-5962-4d20-8810-71ecbfcabded)
+
+![pred2](https://github.com/user-attachments/assets/12811173-aa85-4ba1-85b1-9d7e32d472f0)
 
 
 
@@ -188,7 +190,7 @@ It features:
 
 - **Memory Constraints**: Managing memory usage during image preprocessing was a significant challenge, especially with large datasets, requiring efficient data handling techniques.
 
-- **Data Cleaning**: Ensuring robust data cleaning processes was essential to handle various image formats and remove corrupt files, which involved rigorous validation.
+- **Data Cleaning**: Ensuring robust data cleaning processes was essential to handling various image formats and removing corrupt files, which involved rigorous validation.
 
 - **Integration Issues**: Integrating model predictions with a responsive web interface presented challenges in maintaining user experience while ensuring accurate and timely responses.
 
